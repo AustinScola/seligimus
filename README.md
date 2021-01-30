@@ -1,0 +1,3 @@
+# Seligimus
+
+A mono-library.
