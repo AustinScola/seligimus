@@ -6,3 +6,6 @@
 
 # Ignore test coverage.
 .coverage
+
+# Ignore setuptools output directory.
+dist
