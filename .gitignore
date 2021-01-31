@@ -6,3 +6,10 @@
 
 # Ignore test coverage.
 .coverage
+
+# Ignore setuptools building directories.
+seligimus.egg-info
+build
+
+# Ignore setuptools output directory.
+dist
