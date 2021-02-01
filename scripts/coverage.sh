@@ -8,4 +8,4 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 pushd "${SELIGIMUS}" > /dev/null
 trap "popd > /dev/null" EXIT
 
-python3 -m pytest --cov=illud --cov-report term-missing
+python3 -m pytest --cov=seligimus --cov-report term-missing
