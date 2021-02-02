@@ -1,5 +1,6 @@
 """A build script using setuptools for the seligimus package."""
 import pathlib
+from typing import List
 
 import setuptools  # type: ignore
 
@@ -7,6 +8,8 @@ _HERE = pathlib.Path(__file__).parent
 
 _README = _HERE / 'README.md'
 _LONG_DESCRIPTION = _README.read_text()
+
+_PACKAGES: List[str] = setuptools.find_packages(where=_HERE, include=['seligimus*'])
 
 setuptools.setup(
     name='seligimus',
@@ -17,7 +20,7 @@ setuptools.setup(
     long_description=_LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     url='https://github.com/pypa/sampleproject',
-    packages=['seligimus'],
+    packages=_PACKAGES,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python :: 3',
