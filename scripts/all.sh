@@ -14,3 +14,5 @@ trap "popd > /dev/null" EXIT
 ./test.sh
 
 ./type_check.sh
+
+./build.sh
