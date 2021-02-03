@@ -22,3 +22,7 @@ jobs:
     - name: Build a Python source distrubution and wheel
       run: |
         ./scripts/build.sh
+
+    - name: Test the wheel
+      run: |
+        ./scripts/test_wheel.sh
