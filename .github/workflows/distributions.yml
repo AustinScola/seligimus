@@ -1,9 +1,9 @@
-name: Build Python distrubutions
+name: Build and Test Python distrubutions
 
 on: [push]
 
 jobs:
-  build:
+  build-and-test:
 
     runs-on: ubuntu-latest
 
@@ -22,3 +22,7 @@ jobs:
     - name: Build a Python source distrubution and wheel
       run: |
         ./scripts/build.sh
+
+    - name: Test the wheel
+      run: |
+        ./scripts/test_wheel.sh

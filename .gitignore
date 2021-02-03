@@ -4,6 +4,9 @@
 # Ignore the virtual environment used by testing and building scripts.
 venv
 
+# Ignore the virtual environments used by testing and building scripts.
+venvs
+
 # Ignore mypy cache.
 .mypy_cache
 
