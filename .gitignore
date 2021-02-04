@@ -16,4 +16,5 @@ seligimus.egg-info
 build
 
 # Ignore setuptools output directory.
-dist
+dist/*
+!dist/.gitkeep
