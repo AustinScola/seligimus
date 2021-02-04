@@ -8,6 +8,5 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 pushd "${SELIGIMUS}" > /dev/null
 trap "popd > /dev/null" EXIT
 
-find . -name "*.py" | xargs python3 -m yapf -i
-
-find . -name "*.py" | xargs python3 -m isort -i
+python3 -m yapf -i -r .
+python3 -m isort .
