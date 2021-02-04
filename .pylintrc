@@ -1,3 +1,6 @@
+[MASTER]
+ignore=venvs,build
+
 [MESSAGE CONTROL]
 enable=useless-suppression
 disable=duplicate-code
