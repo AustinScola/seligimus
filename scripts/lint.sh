@@ -8,4 +8,4 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 pushd "${SELIGIMUS}" > /dev/null
 trap "popd > /dev/null" EXIT
 
-find . -name "*.py" | xargs python3 -m pylint
+find . \( -path ./venvs -o -path ./build \) -prune -false -o -name "*.py" | xargs python3 -m pylint
