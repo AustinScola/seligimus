@@ -9,11 +9,14 @@ _HERE = pathlib.Path(__file__).parent
 _README = _HERE / 'README.md'
 _LONG_DESCRIPTION = _README.read_text()
 
+_VERSION_FILE = _HERE / 'VERSION.txt'
+_VERSION = _VERSION_FILE.read_text()
+
 _PACKAGES: List[str] = setuptools.find_packages(where=_HERE, include=['seligimus*'])
 
 setuptools.setup(
     name='seligimus',
-    version='0.1.0',
+    version=_VERSION,
     author='Austin Scola',
     author_email='austinscola@gmail.com',
     description='A mono-library.',
