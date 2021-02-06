@@ -6,24 +6,61 @@ HERE="$(dirname "$(readlink -f "$BASH_SOURCE")")"
 SELIGIMUS="$(realpath "${HERE}/..")"
 DISTRIBUTION="${SELIGIMUS}/dist"
 
-# Find all wheel files in the distribution directory.
-WHEEL_FILES=$(find "${DISTRIBUTION}" -maxdepth 1 -name "*.whl")
-
-# Determine the number of wheel files.
-NUMBER_OF_WHEELS="$(echo "${WHEEL_FILES}" | wc -l )"
-
-# Error if there is more than one wheel file.
-if [[ "${NUMBER_OF_WHEELS}" -gt 1 ]]; then
-    echo "ERROR: There are ${NUMBER_OF_WHEELS} wheel files in the distribution directory"\
-         "${DISTRIBUTION} and it was only expected that there would be one wheel file."
+function help() {
+    echo "$0 [-h | --help | ((-w | --wheel) <wheel_file>)]"
     echo
-    echo "Try removing the contents of the distribution directory with 'rm -rf ${DISTRIBUTION}'"\
-         "and then rebuilding with '${SELIGIMUS}/scripts/build.sh'?"
-    exit 1
-fi
+    echo "Options:"
+    echo "    -h, --help             Print help and exit"
+    echo "    -w, --wheel <wheel>    Test the given wheel"
+}
 
-WHEEL_FILE="${WHEEL_FILES}"
-echo "Found a wheel file '${WHEEL_FILE}' to test."
+function parse_arguments() {
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            -h | --help)
+                help
+                exit
+                ;;
+            -w | --wheel)
+                WHEEL_FILE="$2"
+                shift
+                ;;
+            *)
+                echo "ERROR: Unknown argument $1"
+                help
+                exit 2
+                ;;
+        esac
+        shift
+    done
+}
+
+find_wheel() {
+    # Find all wheel files in the distribution directory.
+    WHEEL_FILES=$(find "${DISTRIBUTION}" -maxdepth 1 -name "*.whl")
+
+    # Determine the number of wheel files.
+    NUMBER_OF_WHEELS="$(echo "${WHEEL_FILES}" | wc -l )"
+
+    # Error if there is more than one wheel file.
+    if [[ "${NUMBER_OF_WHEELS}" -gt 1 ]]; then
+        echo "ERROR: There are ${NUMBER_OF_WHEELS} wheel files in the distribution directory"\
+             "${DISTRIBUTION} and it was only expected that there would be one wheel file."
+        echo
+        echo "Try removing the contents of the distribution directory with 'rm -rf ${DISTRIBUTION}'"\
+             "and then rebuilding with '${SELIGIMUS}/scripts/build.sh'?"
+        exit 1
+    fi
+
+    WHEEL_FILE="${WHEEL_FILES}"
+    echo "Found a wheel file '${WHEEL_FILE}' to test."
+}
+
+if [[ "$#" -ge 1 ]]; then
+    parse_arguments "$@"
+else
+    find_wheel
+fi
 
 VENV="${SELIGIMUS}/venvs/wheel_testing"
 
