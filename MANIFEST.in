@@ -1,2 +1,3 @@
 include scripts/build.sh
 include requirements/build_requirements.txt
+include VERSION.txt
