@@ -26,3 +26,7 @@ jobs:
     - name: Test the wheel
       run: |
         ./scripts/test_wheel.sh
+
+    - name: Test the source distribution
+      run: |
+        ./scripts/test_source_distribution.sh
