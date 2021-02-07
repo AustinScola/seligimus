@@ -15,7 +15,11 @@ jobs:
       with:
         python-version: 3.6
 
-    - name: Install dependencies
+    - name: Install APT dependencies
+      run: |
+        sudo apt-get install zipcmp
+
+    - name: Install Python dependencies
       run: |
         python3 -m pip install -r requirements/build_requirements.txt
 
