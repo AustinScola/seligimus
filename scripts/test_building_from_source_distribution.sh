@@ -42,6 +42,10 @@ if [[ "${SOURCE_DISTRIBUTION_CONTENTS}" != "${BUILT_SOURCE_DISTRIBUTION_CONTENTS
     exit 1
 fi
 
-# Test the wheel that was built using the source distribution.
+# Test the contents of the wheel that was built using the source distribution to the contents of the
+# wheel built from the repository.
+WHEEL="${DISTRIBUTION_DIRECTORY}/seligimus-${VERSION}-py3-none-any.whl"
 BUILT_WHEEL="${EXTRACTED_SOURCE_DIRECTORY}/dist/seligimus-${VERSION}-py3-none-any.whl"
-"${SELIGIMUS}/scripts/test_wheel.sh" --wheel "${BUILT_WHEEL}"
+
+# diff -y <(unzip -l "${WHEEL}") <(unzip -l "${BUILT_WHEEL}")
+zipcmp "${WHEEL}" "${BUILT_WHEEL}"
