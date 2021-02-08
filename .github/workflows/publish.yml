@@ -6,7 +6,7 @@ jobs:
   publish:
     environment: deployment
     env:
-      TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+      PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
     runs-on: ubuntu-latest
 
