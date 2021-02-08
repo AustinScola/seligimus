@@ -1,0 +1,26 @@
+name: Publish distrubutions to PyPI
+
+on: [workflow_dispatch]
+
+jobs:
+  publish:
+    env:
+      TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python 3.6
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.6
+
+    - name: Build a Python source distrubution and wheel
+      run: |
+        ./scripts/build.sh
+
+    - name: Publish the distributions
+      run: |
+        ./scripts/publish.sh
