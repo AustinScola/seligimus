@@ -62,22 +62,11 @@ else
     find_wheel
 fi
 
-VENV="${SELIGIMUS}/venvs/wheel_testing"
-
-# Remove the virtual environment if it already exists.
-rm -rf "${VENV}"
-
-# Create a virtual environment to install the wheel file in.
-python3 -m venv "${VENV}"
-
-# Activate the virtual environment.
-source "${VENV}/bin/activate"
+source "${SELIGIMUS}/scripts/library/venv.sh"
+use_venv wheel_testing test_requirements.txt
 
 # Install the wheel in the virtual environment.
 python3 -m pip install ${WHEEL_FILE}
-
-# Install the testing dependencies in the virtual environment.
-python3 -m pip install -r "${SELIGIMUS}/requirements/test_requirements.txt"
 
 # Go to the tests directory. Note that if we went to the root Seligimus directory then the the code 
 # would be used in testing instead of installed wheel (and we wouldn't actually be testing the
