@@ -4,8 +4,7 @@ set -eu
 
 function _make_venv() {
     VENV="$1"
-    rm -rf "${VENV}"
-    python3 -m venv "${VENV}"
+    python3 -m venv --clear "${VENV}"
 }
 
 function _activate_venv() {
