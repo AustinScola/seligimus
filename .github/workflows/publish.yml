@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 jobs:
   publish:
-    environment: deployment
+    environment: PyPI
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 
