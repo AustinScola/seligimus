@@ -12,7 +12,8 @@ VERSION="$(cat "${VERSION_FILE}")"
 SOURCE_DISTRIBUTION="${DISTRIBUTION_DIRECTORY}/seligimus-${VERSION}.tar.gz"
 
 if ! [[ -a "${SOURCE_DISTRIBUTION}" ]]; then
-    echo "ERROR: ..."
+    echo "ERROR: Expected the source distribution to be located at at '${SOURCE_DISTRIBUTION}' but"\
+         "it was not there."
     exit 1
 fi
 
