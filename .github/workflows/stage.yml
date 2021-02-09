@@ -4,7 +4,7 @@ on: [workflow_dispatch]
 
 jobs:
   stage:
-    environment: deployment
+    environment: Test PyPI
     env:
       TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
 
