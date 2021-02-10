@@ -27,7 +27,7 @@ function use_venv() {
     local VENV_NAME="$1"
     local REQUIREMENTS_FILE="$2"
 
-    local VENV_PATH="${SELIGIMUS}/venvs/${VENV_NAME}"
+    local VENV_PATH="$(get_venv_path "${VENV_NAME}")"
 
     _make_venv "${VENV_PATH}"
     _activate_venv "${VENV_PATH}"
