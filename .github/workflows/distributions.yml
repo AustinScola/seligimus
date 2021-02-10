@@ -19,10 +19,6 @@ jobs:
       run: |
         sudo apt-get install zipcmp
 
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install -r requirements/build_requirements.txt
-
     - name: Build a Python source distrubution and wheel
       run: |
         ./scripts/build.sh
