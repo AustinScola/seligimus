@@ -7,5 +7,8 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 
 cd "${SELIGIMUS}"
 
+source "${SELIGIMUS}/scripts/library/venv.sh"
+use_venv developer developer_requirements.txt
+
 python3 -m yapf -i -r .
 python3 -m isort .
