@@ -72,8 +72,7 @@ python3 -m pip install ${WHEEL_FILE}
 # Go to the tests directory. Note that if we went to the root Seligimus directory then the the code 
 # would be used in testing instead of installed wheel (and we wouldn't actually be testing the
 # wheel).
-pushd "${SELIGIMUS}/tests" > /dev/null
-trap "popd > /dev/null" EXIT
+cd "${SELIGIMUS}/tests"
 
 # Verify that the installed Seligmus is being used when running Python.
 SELIGIMUS_PATH=$(python3 -c 'from pathlib import Path; import seligimus; print(Path(seligimus.__file__).parent)')
