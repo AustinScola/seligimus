@@ -63,7 +63,8 @@ else
 fi
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
-use_venv wheel_testing test_requirements.txt
+VENV_NAME=wheel_testing
+use_venv "${VENV_NAME}" test_requirements.txt
 
 # Install the wheel in the virtual environment.
 python3 -m pip install ${WHEEL_FILE}
@@ -77,7 +78,8 @@ trap "popd > /dev/null" EXIT
 # Verify that the installed Seligmus is being used when running Python.
 SELIGIMUS_PATH=$(python3 -c 'from pathlib import Path; import seligimus; print(Path(seligimus.__file__).parent)')
 
-if ! [[ "${SELIGIMUS_PATH}" =~ ^"${VENV}".* ]]; then
+VENV_PATH="$(get_venv_path "${VENV_NAME}")"
+if ! [[ "${SELIGIMUS_PATH}" =~ ^"${VENV_PATH}".* ]]; then
     echo "ERROR: The wheel-installed Seligimus is not being used from Python. Instead the path to"\
         "Seligimus is '${SELIGIMUS_PATH}'."
     exit 1
