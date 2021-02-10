@@ -5,7 +5,6 @@ set -eu
 HERE="$(dirname "$(readlink -f "$BASH_SOURCE")")"
 SELIGIMUS="$(realpath "${HERE}/..")"
 
-pushd "${SELIGIMUS}" > /dev/null
-trap "popd > /dev/null" EXIT
+cd "${SELIGIMUS}"
 
 python3 -m pytest --cov=seligimus --cov-report term-missing
