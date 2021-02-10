@@ -45,6 +45,8 @@ expected_contents+=$'\nLICENSE.txt'
 
 # Add files used for building distributions to the list of expected contents.
 expected_contents+=$'\nscripts/build.sh'
+expected_contents+=$'\nscripts/library/venv.sh'
+expected_contents+=$'\nrequirements/basic_requirements.txt'
 expected_contents+=$'\nrequirements/build_requirements.txt'
 expected_contents+=$'\nsetup.py'
 expected_contents+=$'\nsetup.cfg'
