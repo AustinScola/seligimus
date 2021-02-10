@@ -20,14 +20,8 @@ if [[ -z "${PYPI_TOKEN}" ]]; then
 fi
 set -u
 
-# Set up a virtual environment.
-VENV="${SELIGIMUS}/venvs/deployment"
-rm -rf ${VENV}
-python3 -m venv "${VENV}"
-source "${VENV}/bin/activate"
-
-python3 -m pip install --upgrade pip setuptools wheel
-python3 -m pip install -r "${SELIGIMUS}/requirements/deployment_requirements.txt"
+source "${SELIGIMUS}/scripts/library/venv.sh"
+use_venv deployment deployment_requirements.txt
 
 python3 -m twine upload \
     --non-interactive \
