@@ -3,12 +3,12 @@
 set -eu
 
 function _make_venv() {
-    local VENV="$1"
-    python3 -m venv --clear "${VENV}"
+    local VENV_PATH="$1"
+    python3 -m venv --clear "${VENV_PATH}"
 }
 
 function _activate_venv() {
-    source "${VENV}/bin/activate"
+    source "${VENV_PATH}/bin/activate"
 }
 
 function _install_requirements() {
@@ -27,10 +27,10 @@ function use_venv() {
     local VENV_NAME="$1"
     local REQUIREMENTS_FILE="$2"
 
-    local VENV="${SELIGIMUS}/venvs/${VENV_NAME}"
+    local VENV_PATH="${SELIGIMUS}/venvs/${VENV_NAME}"
 
-    _make_venv "${VENV}"
-    _activate_venv "${VENV}"
+    _make_venv "${VENV_PATH}"
+    _activate_venv "${VENV_PATH}"
     _install_requirements "basic_requirements.txt"
     _install_requirements "${REQUIREMENTS_FILE}"
 }
