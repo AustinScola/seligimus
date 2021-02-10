@@ -31,5 +31,6 @@ function use_venv() {
 
     _make_venv "${VENV}"
     _activate_venv "${VENV}"
+    _install_requirements "basic_requirements.txt"
     _install_requirements "${REQUIREMENTS_FILE}"
 }
