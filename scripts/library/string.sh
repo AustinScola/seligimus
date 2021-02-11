@@ -10,3 +10,12 @@ function number_of_lines() {
     fi
     echo "${NUMBER_OF_LINES}"
 }
+
+function for_each_line() {
+    STRING="$1"
+    FUNCTION="$2"
+
+    while read line; do
+        $FUNCTION "${line}"
+    done <<< "${STRING}"
+}
