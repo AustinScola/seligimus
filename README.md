@@ -1,4 +1,5 @@
 # Seligimus
+[![PyPI version](https://badge.fury.io/py/seligimus.svg)](https://badge.fury.io/py/seligimus)
 
 A mono-library.
 
