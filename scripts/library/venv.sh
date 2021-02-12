@@ -17,6 +17,13 @@ function _install_requirements() {
     python3 -m pip install -r "${REQUIREMENTS_PATH}"
 }
 
+function get_venv_name_from_requirements_file() {
+    local REQUIREMENTS_FILE="$1"
+    local REQUIREMENTS_FILE_NAME="$(basename "${REQUIREMENTS_FILE}")"
+    local VENV_NAME="$( echo "${REQUIREMENTS_FILE_NAME}" | cut --delimiter=_ --fields=1)"
+    echo "${VENV_NAME}"
+}
+
 function get_venv_path() {
     local VENV_NAME="$1"
     local VENV_PATH="${SELIGIMUS}/venvs/${VENV_NAME}"
