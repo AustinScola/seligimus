@@ -12,8 +12,8 @@ function number_of_lines() {
 }
 
 function for_each_line() {
-    STRING="$1"
-    FUNCTION="$2"
+    local STRING="$1"
+    local FUNCTION="$2"
 
     while read line; do
         $FUNCTION "${line}"
