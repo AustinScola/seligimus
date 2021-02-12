@@ -17,7 +17,7 @@ function freeze_requirements() {
     echo "Using virtual environment name '${VENV_NAME}'."
 
     local REQUIREMENTS_FILE="$(basename "${REQUIREMENTS_FILE_PATH}")"
-    use_venv "${VENV_NAME}" "${REQUIREMENTS_FILE}"
+    use_clean_venv "${VENV_NAME}" "${REQUIREMENTS_FILE}"
 
     local FROZEN_REQUIREMENTS="$(pip freeze)"
 

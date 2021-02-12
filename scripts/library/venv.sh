@@ -30,7 +30,7 @@ function get_venv_path() {
     echo "${VENV_PATH}"
 }
 
-function use_venv() {
+function use_clean_venv() {
     local VENV_NAME="$1"
     local REQUIREMENTS_FILE="$2"
 
