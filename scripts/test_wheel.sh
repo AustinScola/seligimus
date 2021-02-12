@@ -6,6 +6,8 @@ HERE="$(dirname "$(readlink -f "$BASH_SOURCE")")"
 SELIGIMUS="$(realpath "${HERE}/..")"
 DISTRIBUTION="${SELIGIMUS}/dist"
 
+source "${SELIGIMUS}/scripts/library/string.sh"
+
 function help() {
     echo "$0 [-h | --help | ((-w | --wheel) <wheel_file>)]"
     echo
@@ -40,7 +42,7 @@ find_wheel() {
     WHEEL_FILES=$(find "${DISTRIBUTION}" -maxdepth 1 -name "*.whl")
 
     # Determine the number of wheel files.
-    NUMBER_OF_WHEELS="$(echo "${WHEEL_FILES}" | wc -l )"
+    NUMBER_OF_WHEELS="$(number_of_lines "${WHEEL_FILES}")"
 
     # Error if there is more than one wheel file.
     if [[ "${NUMBER_OF_WHEELS}" -gt 1 ]]; then
