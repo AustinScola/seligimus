@@ -4,7 +4,9 @@ on: [workflow_dispatch]
 
 jobs:
   publish:
-    environment: PyPI
+    environment:
+      name: PyPI
+      url: https://pypi.org/project/seligimus/
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
 

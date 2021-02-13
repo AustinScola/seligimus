@@ -4,7 +4,9 @@ on: [workflow_dispatch]
 
 jobs:
   stage:
-    environment: Test PyPI
+    environment:
+      name: Test PyPI
+      url: https://test.pypi.org/project/seligimus/
     env:
       TEST_PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
 
