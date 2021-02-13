@@ -17,6 +17,12 @@ function _install_requirements() {
     python3 -m pip install -r "${REQUIREMENTS_FILE_PATH}"
 }
 
+function _install_frozen_requirements() {
+    local FROZEN_REQUIREMENTS_FILE_NAME="$1"
+    local FROZEN_REQUIREMENTS_FILE_PATH="${SELIGIMUS}/requirements/frozen/${FROZEN_REQUIREMENTS_FILE_NAME}"
+    python3 -m pip install -r "${FROZEN_REQUIREMENTS_FILE_PATH}"
+}
+
 function get_venv_name_from_requirements_file() {
     local REQUIREMENTS_FILE_PATH="$1"
     local REQUIREMENTS_FILE_NAME="$(basename "${REQUIREMENTS_FILE_PATH}")"
@@ -40,4 +46,16 @@ function use_clean_venv() {
     _activate_venv "${VENV_PATH}"
     _install_requirements "basic_requirements.txt"
     _install_requirements "${REQUIREMENTS_FILE_NAME}"
+}
+
+function use_clean_venv_from_frozen_requirements() {
+    local VENV_NAME="$1"
+    local FROZEN_REQUIREMENTS_FILE_NAME="$2"
+
+    local VENV_PATH="$(get_venv_path "${VENV_NAME}")"
+
+    _make_venv "${VENV_PATH}"
+    _activate_venv "${VENV_PATH}"
+    _install_requirements "basic_requirements.txt"
+    _install_frozen_requirements "${FROZEN_REQUIREMENTS_FILE_NAME}"
 }

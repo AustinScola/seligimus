@@ -8,6 +8,6 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 cd "${SELIGIMUS}"
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
-use_clean_venv "test" test_requirements.txt
+use_clean_venv_from_frozen_requirements "test" frozen_test_requirements.txt
 
 find . \( -path ./venvs -o -path ./build \) -prune -false -o -name "*.py" | xargs python3 -m pylint

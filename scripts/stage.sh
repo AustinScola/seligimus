@@ -21,7 +21,7 @@ fi
 set -u
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
-use_clean_venv deployment deployment_requirements.txt
+use_clean_venv_from_frozen_requirements deployment frozen_deployment_requirements.txt
 
 python3 -m twine upload \
     --repository testpypi \

@@ -66,7 +66,7 @@ fi
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
 VENV_NAME=wheel_testing
-use_clean_venv "${VENV_NAME}" test_requirements.txt
+use_clean_venv_from_frozen_requirements "${VENV_NAME}" frozen_test_requirements.txt
 
 # Install the wheel in the virtual environment.
 python3 -m pip install ${WHEEL_FILE}
