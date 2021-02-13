@@ -22,6 +22,12 @@ function _activate_venv() {
     source "${VENV_PATH}/bin/activate"
 }
 
+function deactivate_venv() {
+    set +u
+    deactivate
+    set -u
+}
+
 function _install_requirements() {
     local REQUIREMENTS_FILE_NAME="$1"
     local REQUIREMENTS_FILE_PATH="${SELIGIMUS}/requirements/${REQUIREMENTS_FILE_NAME}"
@@ -55,9 +61,7 @@ function requirements_match() {
 
     _activate_venv "${VENV_PATH}"
     local ACTUAL_FROZEN_REQUIREMENTS="$(pip freeze | sed '/pkg-resources/d')"
-    set +u
-    deactivate
-    set -u
+    deactivate_venv
 
     local FROZEN_REQUIREMENTS_FILE_PATH="${SELIGIMUS}/requirements/frozen/${FROZEN_REQUIREMENTS_FILE_NAME}"
     local EXPECTED_FROZEN_REQUIREMENTS="$(cat "${FROZEN_REQUIREMENTS_FILE_PATH}")"

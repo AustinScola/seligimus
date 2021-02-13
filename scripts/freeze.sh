@@ -21,9 +21,7 @@ function freeze_requirements() {
 
     local FROZEN_REQUIREMENTS="$(pip freeze | sed '/pkg-resources/d')"
 
-    set +u
-    deactivate
-    set -u
+    deactivate_venv
 
     FROZEN_REQUIREMENTS_FILE_NAME="frozen_${REQUIREMENTS_FILE}"
     FROZEN_REQUIREMENTS_FILE_PATH="${FROZEN_REQUIREMENTS_DIRECTORY}/${FROZEN_REQUIREMENTS_FILE_NAME}"
