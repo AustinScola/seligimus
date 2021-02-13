@@ -12,14 +12,14 @@ function _activate_venv() {
 }
 
 function _install_requirements() {
-    local REQUIREMENTS_FILE="$1"
-    local REQUIREMENTS_PATH="${SELIGIMUS}/requirements/${REQUIREMENTS_FILE}"
-    python3 -m pip install -r "${REQUIREMENTS_PATH}"
+    local REQUIREMENTS_FILE_NAME="$1"
+    local REQUIREMENTS_FILE_PATH="${SELIGIMUS}/requirements/${REQUIREMENTS_FILE_NAME}"
+    python3 -m pip install -r "${REQUIREMENTS_FILE_PATH}"
 }
 
 function get_venv_name_from_requirements_file() {
-    local REQUIREMENTS_FILE="$1"
-    local REQUIREMENTS_FILE_NAME="$(basename "${REQUIREMENTS_FILE}")"
+    local REQUIREMENTS_FILE_PATH="$1"
+    local REQUIREMENTS_FILE_NAME="$(basename "${REQUIREMENTS_FILE_PATH}")"
     local VENV_NAME="$( echo "${REQUIREMENTS_FILE_NAME}" | cut --delimiter=_ --fields=1)"
     echo "${VENV_NAME}"
 }
@@ -32,12 +32,12 @@ function get_venv_path() {
 
 function use_clean_venv() {
     local VENV_NAME="$1"
-    local REQUIREMENTS_FILE="$2"
+    local REQUIREMENTS_FILE_NAME="$2"
 
     local VENV_PATH="$(get_venv_path "${VENV_NAME}")"
 
     _make_venv "${VENV_PATH}"
     _activate_venv "${VENV_PATH}"
     _install_requirements "basic_requirements.txt"
-    _install_requirements "${REQUIREMENTS_FILE}"
+    _install_requirements "${REQUIREMENTS_FILE_NAME}"
 }
