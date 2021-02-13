@@ -53,6 +53,11 @@ function get_venv_path() {
     echo "${VENV_PATH}"
 }
 
+function get_frozen_requirements() {
+    local FROZEN_REQUIREMENTS="$(pip freeze | sed '/pkg-resources/d')"
+    echo "${FROZEN_REQUIREMENTS}"
+}
+
 function requirements_match() {
     local VENV_NAME="$1"
     local FROZEN_REQUIREMENTS_FILE_NAME="$2"
@@ -60,7 +65,7 @@ function requirements_match() {
     local VENV_PATH="$(get_venv_path "${VENV_NAME}")"
 
     _activate_venv "${VENV_PATH}"
-    local ACTUAL_FROZEN_REQUIREMENTS="$(pip freeze | sed '/pkg-resources/d')"
+    local ACTUAL_FROZEN_REQUIREMENTS="$(get_frozen_requirements)"
     deactivate_venv
 
     local FROZEN_REQUIREMENTS_FILE_PATH="${SELIGIMUS}/requirements/frozen/${FROZEN_REQUIREMENTS_FILE_NAME}"
