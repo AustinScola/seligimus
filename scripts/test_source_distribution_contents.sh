@@ -47,7 +47,7 @@ expected_contents+=$'\nLICENSE.txt'
 expected_contents+=$'\nscripts/build.sh'
 expected_contents+=$'\nscripts/library/venv.sh'
 expected_contents+=$'\nrequirements/basic_requirements.txt'
-expected_contents+=$'\nrequirements/build_requirements.txt'
+expected_contents+=$'\nrequirements/frozen/frozen_build_requirements.txt'
 expected_contents+=$'\nsetup.py'
 expected_contents+=$'\nsetup.cfg'
 

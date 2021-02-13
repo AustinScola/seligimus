@@ -21,7 +21,7 @@ fi
 set -u
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
-use_venv deployment deployment_requirements.txt
+use_venv deployment frozen_deployment_requirements.txt
 
 python3 -m twine upload \
     --non-interactive \

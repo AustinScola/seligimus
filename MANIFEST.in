@@ -1,6 +1,6 @@
 include scripts/build.sh
 include scripts/library/venv.sh
 include requirements/basic_requirements.txt
-include requirements/build_requirements.txt
+include requirements/frozen/frozen_build_requirements.txt
 include VERSION.txt
 include LICENSE.txt

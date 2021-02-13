@@ -17,13 +17,11 @@ function freeze_requirements() {
     echo "Using virtual environment name '${VENV_NAME}'."
 
     local REQUIREMENTS_FILE="$(basename "${REQUIREMENTS_FILE_PATH}")"
-    use_venv "${VENV_NAME}" "${REQUIREMENTS_FILE}"
+    use_clean_venv "${VENV_NAME}" "${REQUIREMENTS_FILE}"
 
-    local FROZEN_REQUIREMENTS="$(pip freeze)"
+    local FROZEN_REQUIREMENTS="$(get_frozen_requirements)"
 
-    set +u
-    deactivate
-    set -u
+    deactivate_venv
 
     FROZEN_REQUIREMENTS_FILE_NAME="frozen_${REQUIREMENTS_FILE}"
     FROZEN_REQUIREMENTS_FILE_PATH="${FROZEN_REQUIREMENTS_DIRECTORY}/${FROZEN_REQUIREMENTS_FILE_NAME}"
