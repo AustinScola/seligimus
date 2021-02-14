@@ -30,9 +30,12 @@ contents=$(echo "${contents}" | sort -t "/")
 # Create a list of the files expected to be in the source distribution.
 expected_contents=""
 
+# Add the file which tells mypy that the Python files have inline type annotations.
+expected_contents+="seligimus/py.typed"
+
 # Add the Python files in the seligimus package to the list of expected contents.
 PYTHON_FILES="$(find "${SELIGIMUS}/seligimus" -type f -name "*.py" -printf "seligimus/%P\n")"
-expected_contents+="${PYTHON_FILES}"
+expected_contents+="${NEWLINE}${PYTHON_FILES}"
 
 # Add the readme to the list of expected contents.
 expected_contents+=$'\nREADME.md'
@@ -56,6 +59,7 @@ expected_contents+=$'\nseligimus.egg-info/dependency_links.txt'
 expected_contents+=$'\nseligimus.egg-info/PKG-INFO'
 expected_contents+=$'\nseligimus.egg-info/SOURCES.txt'
 expected_contents+=$'\nseligimus.egg-info/top_level.txt'
+expected_contents+=$'\nseligimus.egg-info/not-zip-safe'
 
 # Add the manifest to the list of expected contents.
 expected_contents+=$'\nMANIFEST.in'

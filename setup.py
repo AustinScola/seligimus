@@ -24,6 +24,8 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     url='https://github.com/pypa/sampleproject',
     packages=_PACKAGES,
+    package_data={'seligimus': ['py.typed']},
+    zip_safe=False,
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Programming Language :: Python :: 3',
