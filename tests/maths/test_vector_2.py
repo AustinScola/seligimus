@@ -61,11 +61,11 @@ def test_bool(vector2: Vector2, expected_truthiness: bool) -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('vector_2, expected_string', [
-    (Vector2(0, 0), 'Vector2(x=0, y=0)'),
-    (Vector2(0, 1), 'Vector2(x=0, y=1)'),
-    (Vector2(1, 0), 'Vector2(x=1, y=0)'),
-    (Vector2(1, 1), 'Vector2(x=1, y=1)'),
-    (Vector2(7.0, 1.0), 'Vector2(x=7.0, y=1.0)'),
+    (Vector2(0, 0), 'Vector2(0, 0)'),
+    (Vector2(0, 1), 'Vector2(0, 1)'),
+    (Vector2(1, 0), 'Vector2(1, 0)'),
+    (Vector2(1, 1), 'Vector2(1, 1)'),
+    (Vector2(7.0, 1.0), 'Vector2(7.0, 1.0)'),
 ])
 # yapf: enable
 def test_repr(vector_2: Vector2, expected_string: str) -> None:
