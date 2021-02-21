@@ -4,6 +4,7 @@ from typing import Any, Generic, TypeVar
 from seligimus.python.decorators.operators.equality.equal_instance_attributes import \
     equal_instance_attributes
 from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from seligimus.python.decorators.standard_representation import standard_representation
 
 T = TypeVar('T', int, float, complex)  # pylint: disable=invalid-name
 
@@ -22,8 +23,9 @@ class Vector2(Generic[T]):
     def __bool__(self) -> bool:
         return bool(self.x) or bool(self.y)
 
+    @standard_representation
     def __repr__(self) -> str:
-        return f'{self.__class__.__name__}(x={self.x}, y={self.y})'
+        pass  # pragma: no cover
 
     def __add__(self, other_position: 'Vector2') -> 'Vector2':
         x: T = self.x + other_position.x  # pylint: disable=invalid-name
