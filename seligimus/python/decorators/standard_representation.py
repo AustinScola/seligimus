@@ -9,9 +9,8 @@ from seligimus.python.functions.parameters import get_parameters_by_kind
 Repr = Callable[[Any], str]
 
 
-def standard_representation(
-        representation_function: Callable[[Any], str],
-        parameter_to_attribute_name: Optional[Dict[str, str]] = None) -> Callable[[Any], str]:
+def standard_representation(representation_function: Repr,
+                            parameter_to_attribute_name: Optional[Dict[str, str]] = None) -> Repr:
     """Return an repr which returns return a standard representation."""
     del representation_function
 
