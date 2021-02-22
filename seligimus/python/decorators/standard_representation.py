@@ -6,6 +6,8 @@ from seligimus.python.functions.parameter_kind import ParameterKind
 from seligimus.python.functions.parameter_list import ParameterList
 from seligimus.python.functions.parameters import get_parameters_by_kind
 
+Repr = Callable[[Any], str]
+
 
 def standard_representation(
         representation_function: Callable[[Any], str],
