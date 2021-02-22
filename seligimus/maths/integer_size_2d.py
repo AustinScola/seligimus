@@ -1,5 +1,6 @@
 """A size in the two-dimensional integer lattice."""
 from seligimus.maths.vector_2 import Vector2
+from seligimus.python.decorators.standard_representation import standard_representation
 
 
 class IntegerSize2D(Vector2[int]):
@@ -25,5 +26,6 @@ class IntegerSize2D(Vector2[int]):
     def height(self, height: int) -> None:
         self.y = height  # pylint: disable=invalid-name
 
+    @standard_representation
     def __repr__(self) -> str:
-        return f'{self.__class__.__name__}(width={self.width}, height={self.height})'
+        pass  # pragma: no cover

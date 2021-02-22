@@ -59,10 +59,10 @@ def test_height(integer_size_2d: IntegerSize2D, height: int) -> None:
 
 # yapf: disable
 @pytest.mark.parametrize('integer_size_2d, expected_string', [
-    (IntegerSize2D(0, 0), 'IntegerSize2D(width=0, height=0)'),
-    (IntegerSize2D(0, 1), 'IntegerSize2D(width=0, height=1)'),
-    (IntegerSize2D(1, 0), 'IntegerSize2D(width=1, height=0)'),
-    (IntegerSize2D(1, 1), 'IntegerSize2D(width=1, height=1)'),
+    (IntegerSize2D(0, 0), 'IntegerSize2D(0, 0)'),
+    (IntegerSize2D(0, 1), 'IntegerSize2D(0, 1)'),
+    (IntegerSize2D(1, 0), 'IntegerSize2D(1, 0)'),
+    (IntegerSize2D(1, 1), 'IntegerSize2D(1, 1)'),
 ])
 # yapf: enable
 def test_repr(integer_size_2d: IntegerSize2D, expected_string: str) -> None:
