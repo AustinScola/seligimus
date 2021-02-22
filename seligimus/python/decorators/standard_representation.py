@@ -1,15 +1,23 @@
 """A decorator for the repr dunder to return a standard representation."""
 from inspect import Parameter
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Optional
 
 from seligimus.python.functions.parameter_kind import ParameterKind
 from seligimus.python.functions.parameter_list import ParameterList
 from seligimus.python.functions.parameters import get_parameters_by_kind
 
 
-def standard_representation(representation_function: Callable[[Any], str]) -> Callable[[Any], str]:
+def standard_representation(
+        representation_function: Callable[[Any], str],
+        parameter_to_attribute_name: Optional[Dict[str, str]] = None) -> Callable[[Any], str]:
     """Return an repr which returns return a standard representation."""
     del representation_function
+
+    _parameter_to_attribute_name: Dict[str, str]
+    if parameter_to_attribute_name is None:
+        _parameter_to_attribute_name = {}
+    else:
+        _parameter_to_attribute_name = parameter_to_attribute_name
 
     def standard_representation_function(self: Any) -> str:
         class_name: str = self.__class__.__name__
@@ -27,7 +35,8 @@ def standard_representation(representation_function: Callable[[Any], str]) -> Ca
             if parameter_name == 'self':
                 continue
 
-            parameter_value: Any = getattr(self, parameter_name)
+            attribute_name: str = _parameter_to_attribute_name.get(parameter_name, parameter_name)
+            parameter_value = getattr(self, attribute_name)
             parameter_default_value: Any = initialization_positional_parameter.default
 
             parameter_representation: str

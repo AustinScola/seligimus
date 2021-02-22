@@ -29,16 +29,19 @@ def init_5(self: Any, bar: int, baz: str = 'spam') -> None:  # pylint: disable=m
 
 
 # yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('class_name, initialization_method, instance_attributes, expected_representation', [
-    ('Foo', init_1, {}, 'Foo()'),
-    ('Foo', init_2, {'bar': 1}, 'Foo(1)'),
-    ('Foo', init_3, {'bar': 1, 'baz': 'spam'}, "Foo(1, 'spam')"),
-    ('Foo', init_4, {'bar': 1}, 'Foo(bar=1)'),
-    ('Foo', init_5, {'bar': 1, 'baz': 'spam'}, 'Foo(1)'),
+@pytest.mark.parametrize('class_name, initialization_method, instance_attributes, parameter_to_attribute_name, expected_representation', [
+    ('Foo', init_1, {}, None, 'Foo()'),
+    ('Foo', init_2, {'bar': 1}, None, 'Foo(1)'),
+    ('Foo', init_2, {'baz': 1}, {'bar': 'baz'}, 'Foo(1)'),
+    ('Foo', init_3, {'bar': 1, 'baz': 'spam'}, None, "Foo(1, 'spam')"),
+    ('Foo', init_4, {'bar': 1}, None, 'Foo(bar=1)'),
+    ('Foo', init_4, {'wibble': 1}, {'bar': 'wibble'}, 'Foo(bar=1)'),
+    ('Foo', init_5, {'bar': 1, 'baz': 'spam'}, None, 'Foo(1)'),
 ])
 # yapf: enable # pylint: enable=line-too-long
 def test_standard_reprsentation(class_name: str, initialization_method: Callable[[], None],
                                 instance_attributes: Dict[str, Any],
+                                parameter_to_attribute_name: Dict[str, str],
                                 expected_representation: str) -> None:
     """Test seligimus.python.decorators.standard_representation."""
     class_ = types.new_class(class_name)
@@ -46,7 +49,9 @@ def test_standard_reprsentation(class_name: str, initialization_method: Callable
     instance.__init__ = initialization_method
     set_attributes(instance, instance_attributes)
 
-    representation_function: Callable[[Any], str] = standard_representation(instance.__repr__)
+    representation_function: Callable[[Any],
+                                      str] = standard_representation(instance.__repr__,
+                                                                     parameter_to_attribute_name)
 
     representation = representation_function(instance)
 
