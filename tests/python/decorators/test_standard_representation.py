@@ -5,13 +5,20 @@ from typing import Any, Callable, Dict
 import pytest
 
 from seligimus.python.classes.attributes import set_attributes
-from seligimus.python.decorators.standard_representation import Repr, standard_representation
+from seligimus.python.decorators.standard_representation import (Repr, ReprDecorator,
+                                                                 standard_representation)
 
 
 def test_repr() -> None:
     """Test seligimus.python.decorators.standard_representation.Repr."""
     assert Repr.__base__ == Callable  # type: ignore[attr-defined]
     assert Repr.__args__ == (Any, str)  # type: ignore[attr-defined]
+
+
+def test_repr_decorator() -> None:
+    """Test seligimus.python.decorators.standard_representation.ReprDecorator."""
+    assert ReprDecorator.__base__ == Callable  # type: ignore[attr-defined]
+    assert ReprDecorator.__args__ == (Repr, Repr)  # type: ignore[attr-defined]
 
 
 def init_1(self: Any) -> None:  # pylint: disable=missing-function-docstring, unused-argument
