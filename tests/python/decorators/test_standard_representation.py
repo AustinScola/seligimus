@@ -55,9 +55,13 @@ def test_standard_reprsentation(class_name: str, initialization_method: Callable
     instance.__init__ = initialization_method
     set_attributes(instance, instance_attributes)
 
-    representation_function: Callable[[Any],
-                                      str] = standard_representation(instance.__repr__,
-                                                                     parameter_to_attribute_name)
+    representation_function: Repr
+    if parameter_to_attribute_name:
+        representation_decorator: Callable[[Repr], Repr] = \
+            standard_representation(parameter_to_attribute_name=parameter_to_attribute_name)
+        representation_function = representation_decorator(instance.__repr__)
+    else:
+        representation_function = standard_representation(instance.__repr__)
 
     representation = representation_function(instance)
 
