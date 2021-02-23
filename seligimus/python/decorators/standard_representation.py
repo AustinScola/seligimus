@@ -7,6 +7,7 @@ from seligimus.python.functions.parameter_list import ParameterList
 from seligimus.python.functions.parameters import get_parameters_by_kind
 
 Repr = Callable[[Any], str]
+ReprDecorator = Callable[[Repr], Repr]
 
 
 @overload
@@ -16,16 +17,14 @@ def standard_representation(representation_function: Repr,
 
 
 @overload
-def standard_representation(
-        representation_function: None = None,
-        parameter_to_attribute_name: Dict[str, str] = ...) -> Callable[[Repr], Repr]:
+def standard_representation(representation_function: None = None,
+                            parameter_to_attribute_name: Dict[str, str] = ...) -> ReprDecorator:
     ...  # pragma: no cover
 
 
 def standard_representation(
-    representation_function: Optional[Repr] = None,
-    parameter_to_attribute_name: Optional[Dict[str, str]] = None
-) -> Union[Repr, Callable[[Repr], Repr]]:
+        representation_function: Optional[Repr] = None,
+        parameter_to_attribute_name: Optional[Dict[str, str]] = None) -> Union[Repr, ReprDecorator]:
     """Return either a decorator or a standard representation function.
 
     If passed a parameter name to attribute name mapping, then act as a decorator factory, and
