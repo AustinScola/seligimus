@@ -58,3 +58,16 @@ def test_init(x: Optional[int], pass_x_as_argument: bool, pass_x_as_keyword_argu
 
     assert integer_position_2d.x == expected_x
     assert integer_position_2d.y == expected_y
+
+
+# yapf: disable
+@pytest.mark.parametrize('integer_position_2d, other, expected_sum', [
+    (IntegerPosition2D(0, 0), IntegerPosition2D(0, 0), IntegerPosition2D(0, 0)),
+])
+# yapf: enable
+def test_add(integer_position_2d: IntegerPosition2D, other: IntegerPosition2D,
+             expected_sum: IntegerPosition2D) -> None:
+    """Test seligimus.maths.integer_position_2d.IntegerPosition2D.__add__."""
+    sum_: IntegerPosition2D = integer_position_2d + other
+
+    assert sum_ == expected_sum
