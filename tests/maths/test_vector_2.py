@@ -17,14 +17,14 @@ from seligimus.maths.vector_2 import T, Vector2
 # yapf: enable
 def test_init(x: T, y: T) -> None:
     """Test seligimus.maths.vector_2.Vector2.__init__."""
-    vector2 = Vector2(x, y)
+    vector_2 = Vector2(x, y)
 
-    assert vector2.x == x
-    assert vector2.y == y
+    assert vector_2.x == x
+    assert vector_2.y == y
 
 
 # yapf: disable
-@pytest.mark.parametrize('vector2, other, expected_equality', [
+@pytest.mark.parametrize('vector_2, other, expected_equality', [
     (Vector2(0, 0), 'foo', False),
     (Vector2(0, 0), Vector2(0, 1), False),
     (Vector2(0, 0), Vector2(1, 0), False),
@@ -37,24 +37,24 @@ def test_init(x: T, y: T) -> None:
     (Vector2(7.0, 1.0), Vector2(7.0, 1.0), True),
 ])
 # yapf: enable
-def test_eq(vector2: Vector2, other: Any, expected_equality: bool) -> None:
-    """Test seligimus.maths.vector2.Vector2.__eq__."""
-    equality: bool = vector2 == other
+def test_eq(vector_2: Vector2, other: Any, expected_equality: bool) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__eq__."""
+    equality: bool = vector_2 == other
 
     assert equality == expected_equality
 
 
 # yapf: disable
-@pytest.mark.parametrize('vector2, expected_truthiness', [
+@pytest.mark.parametrize('vector_2, expected_truthiness', [
     (Vector2(0, 0), False),
     (Vector2(0, 1), True),
     (Vector2(1, 0), True),
     (Vector2(1, 1), True),
 ])
 # yapf: enable
-def test_bool(vector2: Vector2, expected_truthiness: bool) -> None:
-    """Test seligimus.maths.vector2.Vector2.__bool__."""
-    truthy: bool = bool(vector2)
+def test_bool(vector_2: Vector2, expected_truthiness: bool) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__bool__."""
+    truthy: bool = bool(vector_2)
 
     assert truthy == expected_truthiness
 
