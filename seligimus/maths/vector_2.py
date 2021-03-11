@@ -27,13 +27,13 @@ class Vector2(Generic[T]):
     def __repr__(self) -> str:
         pass  # pragma: no cover
 
-    def __add__(self, other_position: 'Vector2') -> 'Vector2':
-        x: T = self.x + other_position.x  # pylint: disable=invalid-name
-        y: T = self.y + other_position.y  # pylint: disable=invalid-name
+    def __add__(self, other: 'Vector2') -> 'Vector2':
+        x: T = self.x + other.x  # pylint: disable=invalid-name
+        y: T = self.y + other.y  # pylint: disable=invalid-name
         sum_ = Vector2(x, y)
         return sum_
 
-    def __iadd__(self, other_vector_2: 'Vector2') -> 'Vector2':
-        self.x += other_vector_2.x
-        self.y += other_vector_2.y
+    def __iadd__(self, other: 'Vector2') -> 'Vector2':
+        self.x += other.x
+        self.y += other.y
         return self
