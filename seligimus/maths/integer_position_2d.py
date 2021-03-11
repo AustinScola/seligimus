@@ -11,6 +11,10 @@ class IntegerPosition2D(Vector2[int]):  # pylint: disable=too-few-public-methods
         sum_: Vector2[int] = super().__add__(other)
         return IntegerPosition2D(sum_.x, sum_.y)
 
+    def __sub__(self, other: Vector2[int]) -> 'IntegerPosition2D':
+        difference: Vector2[int] = super().__sub__(other)
+        return IntegerPosition2D(difference.x, difference.y)
+
     def __iadd__(self, other: Vector2[int]) -> 'IntegerPosition2D':
         super().__iadd__(other)
         return self
