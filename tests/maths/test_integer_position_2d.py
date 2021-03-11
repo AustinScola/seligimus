@@ -97,3 +97,16 @@ def test_iadd(integer_position_2d: IntegerPosition2D, other: IntegerPosition2D,
     integer_position_2d += other
 
     assert integer_position_2d == expected_sum
+
+
+# yapf: disable
+@pytest.mark.parametrize('integer_position_2d, other, expected_difference', [
+    (IntegerPosition2D(0, 0), IntegerPosition2D(0, 0), IntegerPosition2D(0, 0)),
+])
+# yapf: enable
+def test_isub(integer_position_2d: IntegerPosition2D, other: IntegerPosition2D,
+              expected_difference: IntegerPosition2D) -> None:
+    """Test seligimus.maths.integer_position_2d.IntegerPosition2D.__isub__."""
+    integer_position_2d -= other
+
+    assert integer_position_2d == expected_difference

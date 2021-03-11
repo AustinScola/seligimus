@@ -18,3 +18,7 @@ class IntegerPosition2D(Vector2[int]):  # pylint: disable=too-few-public-methods
     def __iadd__(self, other: Vector2[int]) -> 'IntegerPosition2D':
         super().__iadd__(other)
         return self
+
+    def __isub__(self, other: Vector2[int]) -> 'IntegerPosition2D':
+        super().__isub__(other)
+        return self
