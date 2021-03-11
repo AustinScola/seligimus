@@ -103,6 +103,33 @@ def test_add(vector_2: Vector2, other: Vector2, expected_sum: Vector2) -> None:
 
 
 # yapf: disable
+@pytest.mark.parametrize('vector_2, other, expected_difference', [
+    (Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)),
+    (Vector2(0, 0), Vector2(0, 1), Vector2(0, -1)),
+    (Vector2(0, 0), Vector2(1, 0), Vector2(-1, 0)),
+    (Vector2(0, 0), Vector2(1, 1), Vector2(-1, -1)),
+    (Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)),
+    (Vector2(0, 1), Vector2(0, 1), Vector2(0, 0)),
+    (Vector2(0, 1), Vector2(1, 0), Vector2(-1, 1)),
+    (Vector2(0, 1), Vector2(1, 1), Vector2(-1, 0)),
+    (Vector2(1, 0), Vector2(0, 0), Vector2(1, 0)),
+    (Vector2(1, 0), Vector2(0, 1), Vector2(1, -1)),
+    (Vector2(1, 0), Vector2(1, 0), Vector2(0, 0)),
+    (Vector2(1, 0), Vector2(1, 1), Vector2(0, -1)),
+    (Vector2(1, 1), Vector2(0, 0), Vector2(1, 1)),
+    (Vector2(1, 1), Vector2(0, 1), Vector2(1, 0)),
+    (Vector2(1, 1), Vector2(1, 0), Vector2(0, 1)),
+    (Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)),
+])
+# yapf: enable
+def test_sub(vector_2: Vector2, other: Vector2, expected_difference: Vector2) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__sub__."""
+    difference = vector_2 - other
+
+    assert difference == expected_difference
+
+
+# yapf: disable
 @pytest.mark.parametrize('vector_2, other, expected_sum', [
     (Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)),
     (Vector2(0, 0), Vector2(0, 1), Vector2(0, 1)),

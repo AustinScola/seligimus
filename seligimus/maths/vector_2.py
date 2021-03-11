@@ -33,6 +33,12 @@ class Vector2(Generic[T]):
         sum_ = Vector2(x, y)
         return sum_
 
+    def __sub__(self, other: 'Vector2') -> 'Vector2':
+        x: T = self.x - other.x  # pylint: disable=invalid-name
+        y: T = self.y - other.y  # pylint: disable=invalid-name
+        difference = Vector2(x, y)
+        return difference
+
     def __iadd__(self, other: 'Vector2') -> 'Vector2':
         self.x += other.x
         self.y += other.y
