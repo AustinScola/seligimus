@@ -100,3 +100,30 @@ def test_add(vector_2: Vector2, other_position: Vector2, expected_sum: Vector2) 
     sum_ = vector_2 + other_position
 
     assert sum_ == expected_sum
+
+
+# yapf: disable
+@pytest.mark.parametrize('vector_2, other_position, expected_sum', [
+    (Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)),
+    (Vector2(0, 0), Vector2(0, 1), Vector2(0, 1)),
+    (Vector2(0, 0), Vector2(1, 0), Vector2(1, 0)),
+    (Vector2(0, 0), Vector2(1, 1), Vector2(1, 1)),
+    (Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)),
+    (Vector2(0, 1), Vector2(0, 1), Vector2(0, 2)),
+    (Vector2(0, 1), Vector2(1, 0), Vector2(1, 1)),
+    (Vector2(0, 1), Vector2(1, 1), Vector2(1, 2)),
+    (Vector2(1, 0), Vector2(0, 0), Vector2(1, 0)),
+    (Vector2(1, 0), Vector2(0, 1), Vector2(1, 1)),
+    (Vector2(1, 0), Vector2(1, 0), Vector2(2, 0)),
+    (Vector2(1, 0), Vector2(1, 1), Vector2(2, 1)),
+    (Vector2(1, 1), Vector2(0, 0), Vector2(1, 1)),
+    (Vector2(1, 1), Vector2(0, 1), Vector2(1, 2)),
+    (Vector2(1, 1), Vector2(0, 0), Vector2(1, 1)),
+    (Vector2(1, 1), Vector2(0, 1), Vector2(1, 2)),
+])
+# yapf: enable
+def test_iadd(vector_2: Vector2, other_position: Vector2, expected_sum: Vector2) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__iadd__."""
+    vector_2 += other_position
+
+    assert vector_2 == expected_sum

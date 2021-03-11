@@ -32,3 +32,8 @@ class Vector2(Generic[T]):
         y: T = self.y + other_position.y  # pylint: disable=invalid-name
         sum_ = Vector2(x, y)
         return sum_
+
+    def __iadd__(self, other_vector_2: 'Vector2') -> 'Vector2':
+        self.x += other_vector_2.x
+        self.y += other_vector_2.y
+        return self
