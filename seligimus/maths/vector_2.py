@@ -43,3 +43,8 @@ class Vector2(Generic[T]):
         self.x += other.x
         self.y += other.y
         return self
+
+    def __isub__(self, other: 'Vector2') -> 'Vector2':
+        self.x -= other.x
+        self.y -= other.y
+        return self

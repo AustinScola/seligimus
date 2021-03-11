@@ -154,3 +154,30 @@ def test_iadd(vector_2: Vector2, other: Vector2, expected_sum: Vector2) -> None:
     vector_2 += other
 
     assert vector_2 == expected_sum
+
+
+# yapf: disable
+@pytest.mark.parametrize('vector_2, other, expected_difference', [
+    (Vector2(0, 0), Vector2(0, 0), Vector2(0, 0)),
+    (Vector2(0, 0), Vector2(0, 1), Vector2(0, -1)),
+    (Vector2(0, 0), Vector2(1, 0), Vector2(-1, 0)),
+    (Vector2(0, 0), Vector2(1, 1), Vector2(-1, -1)),
+    (Vector2(0, 1), Vector2(0, 0), Vector2(0, 1)),
+    (Vector2(0, 1), Vector2(0, 1), Vector2(0, 0)),
+    (Vector2(0, 1), Vector2(1, 0), Vector2(-1, 1)),
+    (Vector2(0, 1), Vector2(1, 1), Vector2(-1, 0)),
+    (Vector2(1, 0), Vector2(0, 0), Vector2(1, 0)),
+    (Vector2(1, 0), Vector2(0, 1), Vector2(1, -1)),
+    (Vector2(1, 0), Vector2(1, 0), Vector2(0, 0)),
+    (Vector2(1, 0), Vector2(1, 1), Vector2(0, -1)),
+    (Vector2(1, 1), Vector2(0, 0), Vector2(1, 1)),
+    (Vector2(1, 1), Vector2(0, 1), Vector2(1, 0)),
+    (Vector2(1, 1), Vector2(1, 0), Vector2(0, 1)),
+    (Vector2(1, 1), Vector2(1, 1), Vector2(0, 0)),
+])
+# yapf: enable
+def test_isub(vector_2: Vector2, other: Vector2, expected_difference: Vector2) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__isub__."""
+    vector_2 -= other
+
+    assert vector_2 == expected_difference
