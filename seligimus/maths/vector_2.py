@@ -1,9 +1,7 @@
 """A two-dimensional vector."""
 from typing import Any, Generic, TypeVar
 
-from seligimus.python.decorators.operators.equality.equal_instance_attributes import \
-    equal_instance_attributes
-from seligimus.python.decorators.operators.equality.equal_type import equal_type
+from seligimus.python.decorators.operators.equality.standard_equality import standard_equality
 from seligimus.python.decorators.standard_representation import standard_representation
 
 T = TypeVar('T', int, float, complex)  # pylint: disable=invalid-name
@@ -15,10 +13,9 @@ class Vector2(Generic[T]):
         self.x: T = x  # pylint: disable=invalid-name
         self.y: T = y  # pylint: disable=invalid-name
 
-    @equal_type
-    @equal_instance_attributes
+    @standard_equality
     def __eq__(self, other: Any) -> bool:
-        return True
+        pass  # pragma: no cover
 
     def __bool__(self) -> bool:
         return bool(self.x) or bool(self.y)
