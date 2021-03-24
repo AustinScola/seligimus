@@ -1,5 +1,5 @@
 """Test seligimus.python.decorators.operators.equality.standard_equality."""
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import pytest
 
@@ -10,6 +10,10 @@ from seligimus.python.decorators.operators.equality.standard_equality import sta
 
 # yapf: disable # pylint: disable=line-too-long
 @pytest.mark.parametrize('equality_operator, self_class_name, other_class_name, self_attributes, other_attributes, expected_equality', [
+    (None, 'Foo', 'Bar', {}, {}, False),
+    (None, 'Foo', 'Foo', {'spam': 1}, {}, False),
+    (None, 'Foo', 'Foo', {}, {}, True),
+    (None, 'Foo', 'Foo', {'spam': 1}, {'spam': 1}, True),
     (lambda self, other: None, 'Foo', 'Bar', {}, {}, False),
     (lambda self, other: None, 'Foo', 'Foo', {'spam': 1}, {}, False),
     (lambda self, other: None, 'Foo', 'Foo', {}, {}, True),
@@ -17,7 +21,7 @@ from seligimus.python.decorators.operators.equality.standard_equality import sta
 ])
 # yapf: enable # pylint: enable=line-too-long
 # pylint: disable=too-many-arguments
-def test_standard_equality(equality_operator: EqualityOperator, self_class_name: str,
+def test_standard_equality(equality_operator: Optional[EqualityOperator], self_class_name: str,
                            other_class_name: str, self_attributes: Dict[str, Any],
                            other_attributes: Dict[str, Any], expected_equality: bool) -> None:
     """Test seligimus.python.decorators.operators.equality.standard_equality.standard_equality."""
