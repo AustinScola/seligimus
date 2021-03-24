@@ -1,5 +1,5 @@
 """A two-dimensional vector."""
-from typing import Any, Generic, TypeVar
+from typing import Generic, TypeVar
 
 from seligimus.python.decorators.operators.equality.standard_equality import standard_equality
 from seligimus.python.decorators.standard_representation import standard_representation
@@ -13,9 +13,7 @@ class Vector2(Generic[T]):
         self.x: T = x  # pylint: disable=invalid-name
         self.y: T = y  # pylint: disable=invalid-name
 
-    @standard_equality
-    def __eq__(self, other: Any) -> bool:
-        pass  # pragma: no cover
+    __eq__ = standard_equality()
 
     def __bool__(self) -> bool:
         return bool(self.x) or bool(self.y)
