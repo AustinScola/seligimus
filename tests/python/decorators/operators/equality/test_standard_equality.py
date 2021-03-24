@@ -1,9 +1,10 @@
 """Test seligimus.python.decorators.operators.equality.standard_equality."""
-from typing import Any, Callable, Dict
+from typing import Any, Dict
 
 import pytest
 
 from seligimus.python.classes.attributes import set_attributes
+from seligimus.python.decorators.operators.equality.equality_operator import EqualityOperator
 from seligimus.python.decorators.operators.equality.standard_equality import standard_equality
 
 
@@ -16,7 +17,7 @@ from seligimus.python.decorators.operators.equality.standard_equality import sta
 ])
 # yapf: enable # pylint: enable=line-too-long
 # pylint: disable=too-many-arguments
-def test_standard_equality(equality_operator: Callable[[Any, Any], bool], self_class_name: str,
+def test_standard_equality(equality_operator: EqualityOperator, self_class_name: str,
                            other_class_name: str, self_attributes: Dict[str, Any],
                            other_attributes: Dict[str, Any], expected_equality: bool) -> None:
     """Test seligimus.python.decorators.operators.equality.standard_equality.standard_equality."""

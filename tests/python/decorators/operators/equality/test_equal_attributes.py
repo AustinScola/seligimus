@@ -1,5 +1,5 @@
 """Test seligimus.python.decorators.operators.equality.equal_instance_attributes."""
-from typing import Any, Callable, Dict
+from typing import Any, Dict
 
 import pytest
 
@@ -7,6 +7,7 @@ from seligimus.python.classes.attributes import set_attributes
 from seligimus.python.classes.empty_class import EmptyClass
 from seligimus.python.decorators.operators.equality.equal_instance_attributes import \
     equal_instance_attributes
+from seligimus.python.decorators.operators.equality.equality_operator import EqualityOperator
 
 
 # yapf: disable # pylint: disable=line-too-long
@@ -22,10 +23,10 @@ from seligimus.python.decorators.operators.equality.equal_instance_attributes im
     (lambda self, other: True, {'foo': 1, 'bar': 2}, {'foo': 1, 'bar': 2}, True),
 ])
 # yapf: enable # pylint: enable=line-too-long
-def test_equal_instance_attributes(equality_operator: Callable[[Any, Any], bool],
-                                   self_attributes: Dict[str, Any], other_attributes: Dict[str,
-                                                                                           Any],
-                                   expected_equality: bool) -> None:
+def test_equal_instance_attributes(equality_operator: EqualityOperator, self_attributes: Dict[str,
+                                                                                              Any],
+                                   other_attributes: Dict[str,
+                                                          Any], expected_equality: bool) -> None:
     """Test seligimus.python.decorators.operators.equality.equal_instance_attributes.equal_instance_attributes."""  # pylint: disable=line-too-long, useless-suppression
     self = EmptyClass()
     set_attributes(self, self_attributes)
