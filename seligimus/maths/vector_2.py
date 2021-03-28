@@ -43,3 +43,9 @@ class Vector2(Generic[T]):
         self.x -= other.x
         self.y -= other.y
         return self
+
+    def __neg__(self) -> 'Vector2':
+        x: T = -self.x  # pylint: disable=invalid-name
+        y: T = -self.y  # pylint: disable=invalid-name
+        negation = Vector2(x, y)
+        return negation
