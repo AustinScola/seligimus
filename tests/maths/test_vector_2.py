@@ -181,3 +181,21 @@ def test_isub(vector_2: Vector2, other: Vector2, expected_difference: Vector2) -
     vector_2 -= other
 
     assert vector_2 == expected_difference
+
+
+# yapf: disable
+@pytest.mark.parametrize('vector_2, expected_negation', [
+    (Vector2(0, 0), Vector2(0, 0)),
+    (Vector2(0, 1), Vector2(0, -1)),
+    (Vector2(0, -1), Vector2(0, 1)),
+    (Vector2(1, 0), Vector2(-1, 0)),
+    (Vector2(-1, 0), Vector2(1, 0)),
+    (Vector2(1, 1), Vector2(-1, -1)),
+    (Vector2(-1, -1), Vector2(1, 1)),
+])
+# yapf: enable
+def test_neg(vector_2: Vector2, expected_negation: Vector2) -> None:
+    """Test seligimus.maths.vector_2.Vector2.__neg__."""
+    negation: Vector2 = -vector_2
+
+    assert negation == expected_negation

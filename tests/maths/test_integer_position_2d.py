@@ -110,3 +110,21 @@ def test_isub(integer_position_2d: IntegerPosition2D, other: IntegerPosition2D,
     integer_position_2d -= other
 
     assert integer_position_2d == expected_difference
+
+
+# yapf: disable
+@pytest.mark.parametrize('integer_position_2d, expected_negation', [
+    (IntegerPosition2D(0, 0), IntegerPosition2D(0, 0)),
+    (IntegerPosition2D(0, 1), IntegerPosition2D(0, -1)),
+    (IntegerPosition2D(0, -1), IntegerPosition2D(0, 1)),
+    (IntegerPosition2D(1, 0), IntegerPosition2D(-1, 0)),
+    (IntegerPosition2D(-1, 0), IntegerPosition2D(1, 0)),
+    (IntegerPosition2D(1, 1), IntegerPosition2D(-1, -1)),
+    (IntegerPosition2D(-1, -1), IntegerPosition2D(1, 1)),
+])
+# yapf: enable
+def test_neg(integer_position_2d: IntegerPosition2D, expected_negation: Vector2) -> None:
+    """Test seligimus.maths.integer_position_2d.IntegerPosition2D.__neg__."""
+    negation: IntegerPosition2D = -integer_position_2d
+
+    assert negation == expected_negation
