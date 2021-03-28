@@ -22,7 +22,7 @@ setuptools.setup(
     description='A mono-library.',
     long_description=_LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
-    url='https://github.com/pypa/sampleproject',
+    url='https://github.com/AustinScola/seligimus',
     packages=_PACKAGES,
     package_data={'seligimus': ['py.typed']},
     zip_safe=False,
