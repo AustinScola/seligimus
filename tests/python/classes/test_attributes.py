@@ -24,6 +24,7 @@ def test_get_instance_attributes(attributes: Dict[str, Any]) -> None:
 
     gotten_attributes = get_instance_attributes(instance)
 
+    assert gotten_attributes is not instance.__dict__
     assert gotten_attributes == attributes
 
 

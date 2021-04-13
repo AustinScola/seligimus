@@ -4,7 +4,7 @@ from typing import Any, Dict
 
 def get_instance_attributes(instance: Any) -> Dict[str, Any]:
     """Return the instance attributes of an instance."""
-    attributes: Dict[str, Any] = instance.__dict__
+    attributes: Dict[str, Any] = instance.__dict__.copy()
     return attributes
 
 
