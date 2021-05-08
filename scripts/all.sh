@@ -10,7 +10,7 @@ cd "${HERE}"
 
 ./lint.sh
 
-./test.sh
+./coverage.sh
 
 ./type_check.sh
 
