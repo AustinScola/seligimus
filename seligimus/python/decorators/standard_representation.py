@@ -2,6 +2,7 @@
 from inspect import Parameter
 from typing import Any, Callable, Dict, List, Optional, Union, overload
 
+from seligimus.iteration.index import index
 from seligimus.python.functions.parameter_kind import ParameterKind
 from seligimus.python.functions.parameter_list import ParameterList
 from seligimus.python.functions.parameters import get_parameters_by_kind
@@ -42,7 +43,26 @@ def standard_representation(
     def standard_representation_decorator(representation_function: Repr) -> Repr:
         del representation_function
 
-        def standard_representation_function(self: Any) -> str:
+        # pylint: disable=too-many-locals
+        def recursive_standard_representaion(
+                self: Any,
+                parents: Optional[List[Any]] = None,
+                parameter_to_attribute_name: Optional[Dict[str, str]] = None) -> str:
+            if parents is None:
+                parents = []
+
+            if parameter_to_attribute_name is None:
+                parameter_to_attribute_name = {}
+
+            recursive_parent: int
+            try:
+                recursive_parent = index(parents[::-1], lambda parent: parent is self)
+                dots: str = (recursive_parent + 2) * '.'
+                representation = '<' + dots + '>'
+                return representation
+            except IndexError:
+                pass
+
             class_name: str = self.__class__.__name__
 
             parameters_by_kind: Dict[ParameterKind, ParameterList] = \
@@ -55,16 +75,26 @@ def standard_representation(
             for positional_parameter in positional_parameters:
                 parameter_name: str = positional_parameter.name
 
-                attribute_name: str = _parameter_to_attribute_name.get(
-                    parameter_name, parameter_name)
+                attribute_name: str = parameter_to_attribute_name.get(parameter_name,
+                                                                      parameter_name)
                 parameter_value = getattr(self, attribute_name)
                 parameter_default_value: Any = positional_parameter.default
 
                 parameter_representation: str
+                parameter_value_has_standard_representaion = \
+                    hasattr(parameter_value.__repr__, 'is_standard_representation_function')
+
                 if parameter_default_value == Parameter.empty:
-                    parameter_representation = repr(parameter_value)
+                    if parameter_value_has_standard_representaion:
+                        parameter_representation = recursive_standard_representaion(
+                            parameter_value, parents + [self])
+                    else:
+                        parameter_representation = repr(parameter_value)
                 elif parameter_value != parameter_default_value:
-                    parameter_representation = f'{parameter_name}={repr(parameter_value)}'
+                    if parameter_value_has_standard_representaion:
+                        parameter_representation = f'{parameter_name}={recursive_standard_representaion(parameter_value, parents + [self])}'  # pylint: disable=line-too-long, useless-suppression
+                    else:
+                        parameter_representation = f'{parameter_name}={repr(parameter_value)}'
                 else:
                     continue  # pragma: no cover (https://github.com/nedbat/coveragepy/issues/198)
 
@@ -73,6 +103,12 @@ def standard_representation(
             arguments_string: str = ', '.join(arguments)
 
             return f'{class_name}({arguments_string})'
+
+        def standard_representation_function(self: Any) -> str:
+            return recursive_standard_representaion(
+                self, parameter_to_attribute_name=_parameter_to_attribute_name)
+
+        setattr(standard_representation_function, 'is_standard_representation_function', True)
 
         return standard_representation_function
 
