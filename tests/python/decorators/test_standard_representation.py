@@ -1,10 +1,8 @@
 """Test seligimus.python.decorators.standard_representation."""
-import types
 from typing import Any, Callable, Dict
 
 import pytest
 
-from seligimus.python.classes.attributes import set_attributes
 from seligimus.python.decorators.standard_representation import (Repr, ReprDecorator,
                                                                  standard_representation)
 
@@ -21,47 +19,63 @@ def test_repr_decorator() -> None:
     assert ReprDecorator.__args__ == (Repr, Repr)  # type: ignore[attr-defined]
 
 
-def init_1(self: Any) -> None:  # pylint: disable=missing-function-docstring, unused-argument
-    pass
+# pylint: disable=too-few-public-methods, missing-class-docstring, disallowed-name
 
 
-def init_2(self: Any, bar: int) -> None:  # pylint: disable=missing-function-docstring, blacklisted-name, unused-argument
-    pass
+class Foo1():
+    def __init__(self) -> None:
+        pass
 
 
-def init_3(self: Any, bar: int, baz: str) -> None:  # pylint: disable=missing-function-docstring, blacklisted-name, unused-argument
-    pass
+class Foo2():
+    def __init__(self, bar: int) -> None:
+        self.bar: int = bar
 
 
-def init_4(self: Any, bar: int = 0) -> None:  # pylint: disable=missing-function-docstring, blacklisted-name, unused-argument
-    pass
+class Foo2a():
+    def __init__(self, bar: int) -> None:
+        self.baz: int = bar
 
 
-def init_5(self: Any, bar: int, baz: str = 'spam') -> None:  # pylint: disable=missing-function-docstring, blacklisted-name, unused-argument
-    pass
+class Foo3():
+    def __init__(self, bar: int, baz: str) -> None:
+        self.bar: int = bar
+        self.baz: str = baz
 
 
-# yapf: disable # pylint: disable=line-too-long
-@pytest.mark.parametrize('class_name, initialization_method, instance_attributes, parameter_to_attribute_name, expected_representation', [
-    ('Foo', init_1, {}, None, 'Foo()'),
-    ('Foo', init_2, {'bar': 1}, None, 'Foo(1)'),
-    ('Foo', init_2, {'baz': 1}, {'bar': 'baz'}, 'Foo(1)'),
-    ('Foo', init_3, {'bar': 1, 'baz': 'spam'}, None, "Foo(1, 'spam')"),
-    ('Foo', init_4, {'bar': 1}, None, 'Foo(bar=1)'),
-    ('Foo', init_4, {'wibble': 1}, {'bar': 'wibble'}, 'Foo(bar=1)'),
-    ('Foo', init_5, {'bar': 1, 'baz': 'spam'}, None, 'Foo(1)'),
+class Foo4():
+    def __init__(self, bar: int = 0) -> None:
+        self.bar: int = bar
+
+
+class Foo4a():
+    def __init__(self, bar: int = 0) -> None:
+        self.wibble: int = bar
+
+
+class Foo5():
+    def __init__(self, bar: int, baz: str = 'spam') -> None:
+        self.bar: int = bar
+        self.baz: str = baz
+
+
+# pylint: enable=disallowed-name
+
+
+# yapf: disable
+@pytest.mark.parametrize('instance, parameter_to_attribute_name, expected_representation', [
+    (Foo1(), None, 'Foo1()'),
+    (Foo2(1), None, 'Foo2(1)'),
+    (Foo2a(1), {'bar': 'baz'}, 'Foo2a(1)'),
+    (Foo3(1, 'spam'), None, "Foo3(1, 'spam')"),
+    (Foo4(bar=1), None, 'Foo4(bar=1)'),
+    (Foo4a(1), {'bar': 'wibble'}, 'Foo4a(bar=1)'),
+    (Foo5(1), None, 'Foo5(1)'),
 ])
-# yapf: enable # pylint: enable=line-too-long
-def test_standard_reprsentation(class_name: str, initialization_method: Callable[[], None],
-                                instance_attributes: Dict[str, Any],
-                                parameter_to_attribute_name: Dict[str, str],
+# yapf: enable
+def test_standard_reprsentation(instance: Any, parameter_to_attribute_name: Dict[str, str],
                                 expected_representation: str) -> None:
     """Test seligimus.python.decorators.standard_representation."""
-    class_ = types.new_class(class_name)
-    instance = class_()
-    instance.__init__ = initialization_method
-    set_attributes(instance, instance_attributes)
-
     representation_function: Repr
     if parameter_to_attribute_name:
         representation_decorator: Callable[[Repr], Repr] = \

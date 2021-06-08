@@ -54,8 +54,6 @@ def standard_representation(
             initialization_arguments: List[str] = []
             for initialization_positional_parameter in initialization_positional_parameters:
                 parameter_name: str = initialization_positional_parameter.name
-                if parameter_name == 'self':
-                    continue
 
                 attribute_name: str = _parameter_to_attribute_name.get(
                     parameter_name, parameter_name)
