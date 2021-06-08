@@ -45,20 +45,20 @@ def standard_representation(
         def standard_representation_function(self: Any) -> str:
             class_name: str = self.__class__.__name__
 
-            initialiazation_parameters_by_kind: Dict[ParameterKind, ParameterList] = \
-                get_parameters_by_kind( self.__init__)
+            parameters_by_kind: Dict[ParameterKind, ParameterList] = \
+                get_parameters_by_kind(self.__init__)
 
-            initialization_positional_parameters: ParameterList = \
-                initialiazation_parameters_by_kind[ParameterKind.POSITIONAL_OR_KEYWORD]
+            positional_parameters: ParameterList = \
+                parameters_by_kind[ParameterKind.POSITIONAL_OR_KEYWORD]
 
-            initialization_arguments: List[str] = []
-            for initialization_positional_parameter in initialization_positional_parameters:
-                parameter_name: str = initialization_positional_parameter.name
+            arguments: List[str] = []
+            for positional_parameter in positional_parameters:
+                parameter_name: str = positional_parameter.name
 
                 attribute_name: str = _parameter_to_attribute_name.get(
                     parameter_name, parameter_name)
                 parameter_value = getattr(self, attribute_name)
-                parameter_default_value: Any = initialization_positional_parameter.default
+                parameter_default_value: Any = positional_parameter.default
 
                 parameter_representation: str
                 if parameter_default_value == Parameter.empty:
@@ -68,11 +68,11 @@ def standard_representation(
                 else:
                     continue  # pragma: no cover (https://github.com/nedbat/coveragepy/issues/198)
 
-                initialization_arguments.append(parameter_representation)
+                arguments.append(parameter_representation)
 
-            initialization_arguments_string: str = ', '.join(initialization_arguments)
+            arguments_string: str = ', '.join(arguments)
 
-            return f'{class_name}({initialization_arguments_string})'
+            return f'{class_name}({arguments_string})'
 
         return standard_representation_function
 
