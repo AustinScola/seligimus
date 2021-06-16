@@ -8,7 +8,7 @@ SELIGIMUS="$(realpath "${HERE}/..")"
 cd "${SELIGIMUS}"
 
 source "${SELIGIMUS}/scripts/library/venv.sh"
-use_venv developer frozen_developer_requirements.txt
+use_venv format frozen_format_requirements.txt
 
 source "${SELIGIMUS}/scripts/library/cpus.sh"
 NUMBER_OF_CPUS="$(get_number_of_cpus)"
