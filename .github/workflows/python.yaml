@@ -78,5 +78,8 @@ jobs:
           ${{ env.cache-name }}-type-check-
           ${{ env.cache-name }}-
 
+    - name: Cache mypy cache
+      uses: AustinScola/mypy-cache-github-action@v1
+
     - name: Type Check with mypy
       run: ./scripts/type_check.sh
