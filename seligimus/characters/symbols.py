@@ -1,7 +1,7 @@
 """Symbols."""
 from typing import Set
 
-SYMBOLS: Set[str] = {'[', ']', '{', '}', '(', ')', '<', '>', ''' , ''', '=', ',', '.', ';'}
+SYMBOLS: Set[str] = {'[', ']', '{', '}', '(', ')', '<', '>', "'", '"', '=', ',', '.', ';'}
 
 
 def is_symbol(character: str) -> bool:

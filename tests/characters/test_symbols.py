@@ -6,7 +6,7 @@ from seligimus.characters.symbols import SYMBOLS, is_symbol, not_symbol
 
 def test_symbols() -> None:
     """Test seligimus.characters.symbols.SYMBOLS."""
-    assert SYMBOLS == {'[', ']', '{', '}', '(', ')', '<', '>', ''' , ''', '=', ',', '.', ';'}
+    assert SYMBOLS == {'[', ']', '{', '}', '(', ')', '<', '>', "'", '"', '=', ',', '.', ';'}
 
 
 # yapf: disable
