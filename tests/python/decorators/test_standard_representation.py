@@ -95,7 +95,7 @@ class Foo8():
         pass  # pragma: no cover
 
 
-class Bar8():
+class Bar8:
     def __init__(self, foo: Optional['Foo8'] = None):
         self.foo: Optional['Foo8'] = foo
 
