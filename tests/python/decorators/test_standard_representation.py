@@ -72,7 +72,7 @@ foo6 = Foo6()
 foo6.foo = foo6
 
 
-class Foo7():
+class Foo7:
     def __init__(self, foo: Optional['Foo7'] = None):
         self.foo: Optional['Foo7'] = foo
 
