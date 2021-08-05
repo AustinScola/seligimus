@@ -86,7 +86,7 @@ foo7.foo = Foo7()
 foo7.foo.foo = foo7
 
 
-class Foo8():
+class Foo8:
     def __init__(self, bar: 'Bar8'):
         self.bar: 'Bar8' = bar
 
