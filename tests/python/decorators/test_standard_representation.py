@@ -59,7 +59,7 @@ class Foo5():
         self.baz: str = baz
 
 
-class Foo6():
+class Foo6:
     def __init__(self, foo: Optional['Foo6'] = None):
         self.foo: Optional['Foo6'] = foo
 
