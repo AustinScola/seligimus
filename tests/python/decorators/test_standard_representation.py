@@ -53,7 +53,7 @@ class Foo4a():
         self.wibble: int = bar
 
 
-class Foo5():
+class Foo5:
     def __init__(self, bar: int, baz: str = 'spam') -> None:
         self.bar: int = bar
         self.baz: str = baz
