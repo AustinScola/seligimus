@@ -1,5 +1,8 @@
 # Change log
 
+## v0.19.0
+- Add some ANSI escape codes.
+
 ## v0.18.1
 - Fix the symbol characters set to properly include quotation marks.
 
